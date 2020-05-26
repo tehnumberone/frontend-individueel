@@ -1,0 +1,162 @@
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    color: white;
+}
+
+a.navbar-brand:hover {
+    color: #0366d6;
+}
+
+#navi {
+    height: 40px;
+    transition: all .2s ease;
+}
+.mainPage {
+    margin-top:25px;
+    margin-bottom:25px;
+    text-align: center;
+}
+.mainPage img {
+    background-color: #fff;
+    box-shadow: 0px 0px 20px 5px #0ff;
+    width: 700px;
+    height: 700px;
+}
+
+.nav-container {
+    background-color: #212529;
+    color: white;
+}
+
+.nav-container:hover #navi {
+    font-size: 18px;
+    height: 75px;
+    transition: all .2s ease;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+a {
+    color: white;
+}
+
+.dropdown {
+}
+
+.dropdown-menu {
+    background-color: #212529;
+    padding-top: 20px;
+}
+
+.nav-item {
+    padding-right: 25px;
+}
+
+/* Opmaak website                         */
+h1 {
+    font-family: SF Pro Text, SF Pro Icons, AOS Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    font-size: 19px;
+    font-family: "Garamond";
+    font-weight: bold;
+    text-shadow: 1px 1px #212529;
+}
+
+.form-control {
+    width: 220px;
+}
+
+select {
+    border-radius: 10px;
+    min-width: 208px;
+}
+
+input {
+    border-radius: 10px;
+    min-width: 54px !important;
+}
+
+body {
+    /* Margin bottom by footer height */
+    background: #F1F2B5;
+    background: -webkit-linear-gradient(to right, #135058, #F1F2B5);
+    background: linear-gradient(to right, #135058, #F1F2B5);
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 0px solid #e5e5e5 !important;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+/*........................................*/
+
+/* Opmaak character creation en selection */
+.CharacterImage {
+    width: 50px;
+    height: 75px;
+    display: inline !important;
+    margin-top: 10px !important;
+}
+
+.CharacterName {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 18px;
+}
+
+.smalltd {
+    width: 200px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.largetd {
+    font-size: 20px;
+    width: 800px;
+    text-align: left;
+}
+
+.table {
+    border-spacing: 20px;
+}
+
+td {
+    padding: 0px;
+}
+
+#gameScreen {
+    border: 1px solid black;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 800px;
+}
+/*........................................*/
