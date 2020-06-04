@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Login</h1>
         <div class="form-row">
             <div v-if="account.errors.length > 0">
                 <b>Please correct the following error(s):</b>
@@ -22,7 +23,7 @@
             </div>
 
             <div class="col-md-9"></div>
-            <button v-on:click="checkForm()" class="btn btn-success col-md-3">Login</button>
+            <button v-on:click="checkLoginForm()" class="btn btn-success col-md-3">Login</button>
         </div>
     </div>
 </template>
@@ -49,7 +50,7 @@
                 'increment',
                 'updateAccount'
             ]),
-            checkForm() {
+            checkLoginForm() {
                 this.account.errors = [];
 
                 if (!this.account.username) {
@@ -58,9 +59,6 @@
                 if (!this.account.password) {
                     this.account.errors.push("Password required.");
                 }
-                console.log(this.account.errors)
-                console.log(this.account.username)
-                console.log(this.account.password)
                 if (this.account.errors.length == 0) {
                     this.verifyLogin();
                 }
@@ -73,16 +71,17 @@
                 http
                     .post("/login", data)
                     .then(response => {
-                        this.account.id = response.data.id;
-                        if (response.data.username == null) {
+                        console.log(response.data.username);
+                        if (response.data.username === null) {
                             this.account.errors.push("Username or password incorrect.");
-                        } else
-                        /* sessionStorage.setItem('user', JSON.stringify(response));
-                        console.log(sessionStorage.getItem('user'));*/
-                        console.log(response.data);
-                        this.$store.commit('updateAccount',this.account);
-                        this.$router.push("/");
-
+                        } else {
+                            sessionStorage.setItem('user', (response.data));
+                            sessionStorage.setItem('username', (response.data.username));
+                            sessionStorage.setItem('role', (response.data.role));
+                            this.$store.commit('updateAccount', this.account);
+                            this.$store.commit('setRole', response.data.role);
+                            this.$router.push("/");
+                        }
                     })
                     .catch(e => {
                         console.log(e);
@@ -93,5 +92,5 @@
 </script>
 
 <style scoped>
-
+    @import '../assets/styles/style.css';
 </style>

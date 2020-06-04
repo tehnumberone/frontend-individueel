@@ -1,5 +1,5 @@
 <template>
-    
+    <h1>Play</h1>
 </template>
 
 <script>
@@ -9,5 +9,5 @@
 </script>
 
 <style scoped>
-
+    @import '../assets/styles/style.css';
 </style>

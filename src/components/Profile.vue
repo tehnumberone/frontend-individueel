@@ -10,5 +10,5 @@
 </script>
 
 <style scoped>
-
+    @import '../assets/styles/style.css';
 </style>

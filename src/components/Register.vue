@@ -1,11 +1,16 @@
 <template>
     <div class="form-row">
+        <div class="col-md-12"><h1>Register</h1></div>
         <div v-if="account.errors.length > 0">
             <b>Please correct the following error(s):</b>
             <ul>
                 <li class="col-md-3" v-for="(value, index) in account.errors" v-bind:key="index">{{ value }}</li>
                 <div class="col-md-9"></div>
             </ul>
+        </div>
+        <div v-else><br>
+            <b>Please fill in your details.</b>
+            <br><br>
         </div>
         <div class="col-md-12"></div>
         <div class="form-group col-md-3">
@@ -32,13 +37,14 @@
         </div>
 
         <div class="col-md-9"></div>
-        <button v-on:click="checkForm()" class="btn btn-success col-md-3">Submit</button>
+        <button v-on:click="checkForm(account)" class="btn btn-success col-md-3">Submit</button>
     </div>
 </template>
 
 <script>
-    import http from "../http-common";
-    import {mapMutations} from "vuex";
+    //import http from "../http-common";
+    //import {mapMutations} from "vuex";
+    import {accountService} from "../assets/services/accountService";
 
     export default {
         name: "register",
@@ -50,94 +56,18 @@
                     username: null,
                     password: null,
                     email: null,
-                    repeatPassword: ""
+                    repeatPassword: "",
                 },
             }
         },
         methods: {
-            ...mapMutations([
-                'updateAccount',
-                'resetErrors',
-                'addError',
-                'updateUsernameExists',
-                'updateEmailExists'
-            ]),
-            checkForm() {
-                this.$store.commit('resetErrors');
-                if (!this.account.username) {
-                    this.$store.commit('addError', "Username required.");
-                } else if (this.account.username) {
-                    this.CheckUsername(this.account.username);
-                    console.log(this.$store.getters.getUsernameExists + "username exists?");
-                    if (this.$store.getters.getUsernameExists === true) {
-                        this.$store.commit('addError', "This username is already taken.");
-                    }
-                }
-                if (!this.account.password) {
-                    this.$store.commit('addError', "Password required.");
-                }
-                if (this.account.password !== this.account.repeatPassword) {
-                    this.$store.commit('addError', "Password is not the same as repeat password.");
-                }
-                if (!this.account.email) {
-                    this.$store.commit('addError', "Email required.");
-                } else if (!this.validEmail(this.account.email)) {
-                    this.$store.commit('addError', "Valid email required.");
-                } else if (this.account.email) {
-                    this.CheckEmail(this.account.email);
-                    console.log(this.$store.getters.getEmailExists + "email exists?");
-                    if (this.$store.getters.getEmailExists === true) {
-                        this.$store.commit('addError', "This e-mail is already taken.");
-                    }
-                }
-                this.account.errors = this.$store.getters.getErrors;
+            checkForm(account) {
+                accountService.methods.checkRegisterForm(account, this);
+                this.account.errors = accountService.methods.getErrors(this);
                 if (this.account.errors.length === 0) {
-                    this.saveAccount();
+                    accountService.methods.registerAccount(account);
+                    this.$router.push("login")
                 }
-            },
-            validEmail(email) {
-                let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                return re.test(email);
-            },
-            saveAccount() {
-                let data = {
-                    username: this.account.username,
-                    password: this.account.password,
-                    email: this.account.email
-                };
-                http
-                    .post("/register", data)
-                    .then(response => {
-                        this.account.id = response.data.id;
-                        this.$store.commit('updateAccount', this.account);
-                        this.$router.push("/");
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
-            },
-            CheckEmail(email) {
-                http
-                    .post("/account/email", email)
-                    .then(response => {
-                        console.log(JSON.parse(response.data) + "email");
-                        this.$store.commit('updateEmailExists', JSON.parse(response.data));
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
-
-            },
-            CheckUsername(username) {
-                http
-                    .post("/account/username", username)
-                    .then(response => {
-                        console.log(JSON.parse(response.data) + "username");
-                        this.$store.commit('updateUsernameExists', JSON.parse(response.data));
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
             }
         }
     }
