@@ -23,7 +23,7 @@
             </div>
 
             <div class="col-md-9"></div>
-            <button v-on:click="checkLoginForm()" class="btn btn-success col-md-3">Login</button>
+            <button v-on:click="checkLoginForm()" id="loginButton" class="btn btn-success col-md-3">Login</button>
         </div>
     </div>
 </template>
@@ -75,7 +75,8 @@
                         if (response.data.username === null) {
                             this.account.errors.push("Username or password incorrect.");
                         } else {
-                            sessionStorage.setItem('user', (response.data));
+                            sessionStorage.setItem('user', (JSON.stringify(response.data)));
+                            console.log(sessionStorage.getItem('user'));
                             sessionStorage.setItem('username', (response.data.username));
                             sessionStorage.setItem('role', (response.data.role));
                             this.$store.commit('updateAccount', this.account);

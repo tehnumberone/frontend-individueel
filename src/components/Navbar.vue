@@ -13,7 +13,6 @@
                 <div>Logged in as {{getusername}}</div>
                 <router-link class="btn btn-primary" to="/characters">Characters</router-link>
                 <router-link class="btn btn-primary" to="/characters/create">Create Character</router-link>
-                <router-link class="btn btn-primary" to="/play">Play</router-link>
                 <router-link v-if="getrole === 'Administrator'" class="btn btn-primary" to="/items">Items</router-link>
                 <router-link v-if="getrole === 'Administrator'" class="btn btn-primary" to="/items/create">
                     Create Items

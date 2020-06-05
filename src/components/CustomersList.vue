@@ -26,7 +26,26 @@
         name: "customers-list",
         data() {
             return {
-                customers: []
+                customers: [
+                    {
+                        id: 1,
+                        name: "bob",
+                        age: 12,
+                        active: true
+                    },
+                    {
+                        id: 2,
+                        name: "bob",
+                        age: 13,
+                        active: true
+                    },
+                    {
+                        id: 3,
+                        name: "bob",
+                        age: 14,
+                        active: true
+                    }
+                ]
             };
         },
         methods: {

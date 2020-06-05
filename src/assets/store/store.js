@@ -15,7 +15,14 @@ export default new Vuex.Store({
         error: {
             usernameError: null,
             emailError: null
+        },
+        item: {
+            name: null,
+            itemImage: null,
+            type: null
         }
+        ,
+        items: [],
     },
     mutations: {
         updateAccount(state, account) {
@@ -47,7 +54,16 @@ export default new Vuex.Store({
             state.account.password = null;
             state.account.role = null;
             sessionStorage.clear();
-        }
+        },
+        setItems(state, items) {
+            localStorage.setItem('items',JSON.stringify(items));
+        },
+        setCharacters(state, characters){
+            localStorage.setItem('characters',JSON.stringify(characters));
+        },
+        setCharacter(state, character){
+            localStorage.setItem('character',JSON.stringify(character));
+        },
     },
     getters: {
         getErrors: state => {
@@ -75,9 +91,20 @@ export default new Vuex.Store({
         },
         getEmailError: state => {
             return state.error.emailError;
+        },
+        // eslint-disable-next-line no-unused-vars
+        getItems:state=>{
+            return JSON.parse((localStorage.getItem('items')));
+        },
+        // eslint-disable-next-line no-unused-vars
+        getCharacters:state=>{
+            return JSON.parse((localStorage.getItem('characters')));
+        },
+        // eslint-disable-next-line no-unused-vars
+        getCharacter:state=>{
+            return JSON.parse((localStorage.getItem('character')));
         }
-    },
-    setters: {}
+    }
 })
 
 

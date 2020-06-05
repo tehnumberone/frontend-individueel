@@ -8,23 +8,47 @@
                 <th>Item Type</th>
                 <th>Options</th>
             </tr>
-            <tr>
-                <td><img src="" class="itemImage"/>item.ItemImage</td>
-                <td><label class="charName">item.Name</label></td>
-                <td><label class="charName">item.ItemType</label></td>
+            <tr v-for="(item, index) in items" v-bind:key="index">
+                <td><img src="" class="itemImage"/>{{item.name}}</td>
+                <td><label class="charName">{{item.Name}}</label></td>
+                <td><label class="charName">{{item.ItemType}}</label></td>
                 <td class="smalltd">
-                        <input type="submit" value="Edit"/>
-                        <input type="submit" value="Delete"/>
+                    <button class="btn btn-success" style="margin-right:5px" >Edit</button>
+                    <button v-on:click="deleteItem(item.id)" class="btn btn-success">Delete</button>
                 </td>
             </tr>
-
         </table>
+        <router-view @refreshData="refreshList"></router-view>
     </div>
 </template>
 
 <script>
+    import {itemService} from "../assets/services/itemService";
+
     export default {
-        name: "Items"
+        name: "Items",
+        data() {
+            return {
+                items: []
+            }
+        },
+        methods: {
+            retrieveItems() {
+                itemService.methods.setAllItems(this);
+                this.items = itemService.methods.getAllItems(this);
+            },
+            refreshList() {
+                this.retrieveItems();
+            },
+            deleteItem(itemId) {
+                itemService.methods.deleteItem(itemId);
+                this.retrieveItems();
+                location.reload();
+            }
+        },
+        mounted() {
+            this.retrieveItems();
+        },
     }
 </script>
 

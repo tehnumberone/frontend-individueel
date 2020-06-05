@@ -36,8 +36,7 @@ export default new Router({
         {path: "/characters/create", name: "createCharacter", component: CreateCharacter},
         {path: "/play", name: "play", component: Play},
         {path: "/items", name: "items", component: Items},
-        {path: "/items/create", name: "createItems", component: CreateItem},
-
+        {path: "/items/create", name: "createItems", component: CreateItem}
     ],
 
 });

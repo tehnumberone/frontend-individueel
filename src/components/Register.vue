@@ -37,14 +37,13 @@
         </div>
 
         <div class="col-md-9"></div>
-        <button v-on:click="checkForm(account)" class="btn btn-success col-md-3">Submit</button>
+        <button v-on:click="checkForm(account)" class="btn btn-success col-md-3">Register</button>
     </div>
 </template>
 
 <script>
-    //import http from "../http-common";
-    //import {mapMutations} from "vuex";
     import {accountService} from "../assets/services/accountService";
+    import {errorService} from "../assets/services/errorService";
 
     export default {
         name: "register",
@@ -63,7 +62,7 @@
         methods: {
             checkForm(account) {
                 accountService.methods.checkRegisterForm(account, this);
-                this.account.errors = accountService.methods.getErrors(this);
+                this.account.errors = errorService.methods.getErrors(this);
                 if (this.account.errors.length === 0) {
                     accountService.methods.registerAccount(account);
                     this.$router.push("login")

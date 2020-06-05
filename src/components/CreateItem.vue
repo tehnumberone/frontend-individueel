@@ -1,34 +1,81 @@
 <template>
     <div>
         <h1>CreateItem</h1>
-            <div class="container row">
-                <div class="col-md-2">
-                    <label>Item Name</label>
-                </div>
-                <div class="col-md-5">
-                    <input type="text"/>
-                </div>
-                <div class="col-md-5"></div>
-                <div class="col-md-2">
-                    <label>Item Type</label>
-                </div>
-                <div class="col-md-5">
-                    <select >
-                        <option></option>
-                    </select>
-                </div>
-                <div class="col-md-5"></div>
-                <div class="col-md-2">
-                    <label>Item Image</label>
-                </div>
+        <div v-if="item.errors.length > 0">
+            <b>Please correct the following error(s):</b>
+            <ul>
+                <li class="col-md-3" v-for="(value, index) in item.errors" v-bind:key="index">{{ value }}</li>
+                <div class="col-md-9"></div>
+            </ul>
+        </div>
+        <div class="container row">
+            <div class="col-md-2">
+                <label>Item Name</label>
             </div>
-            <input type="submit" value="Create" />
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="name" required v-model="item.name" name="name">
+            </div>
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <label>Item Type</label>
+            </div>
+            <div class="col-md-5">
+                <select required v-model="item.type" id="type" name="type">
+                    <option v-for="(value, index) in typesArray" v-bind:key="index">{{value}}</option>
+                </select>
+            </div>
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <label>Item Image</label>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" id="itemImage" required v-model="item.itemImage" name="itemImage">
+            </div>
+        </div>
+        <button v-on:click="checkForm(item)" class="btn btn-success col-md-3">Create Item</button>
     </div>
 </template>
 
 <script>
+    import {itemService} from "../assets/services/itemService";
+    import {errorService} from "../assets/services/errorService";
+
     export default {
-        name: "CreateItem"
+        name: "CreateItem",
+        data() {
+            return {
+                item: {
+                    errors: [],
+                    name: null,
+                    type: null,
+                    itemImage: null
+                },
+                types: {
+                    0: "Weapon",
+                    1: "Tool",
+                    2: "Food",
+                    3: "Armour"
+                },
+                typesArray: []
+            }
+        },
+        methods: {
+            getItemTypeList() {
+                this.typesArray = Object.values(this.types);
+            },
+            checkForm(item){
+                itemService.methods.checkForm(item,this);
+                this.item.errors = errorService.methods.getErrors(this);
+                if (this.item.errors.length === 0) {
+                    itemService.methods.createItem(item);
+                    this.$router.push("/items")
+                    location.reload();
+                }
+            }
+        },
+        mounted() {
+            this.getItemTypeList();
+        }
     }
 </script>
 
