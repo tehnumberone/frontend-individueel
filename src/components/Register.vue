@@ -4,8 +4,7 @@
         <div v-if="account.errors.length > 0">
             <b>Please correct the following error(s):</b>
             <ul>
-                <li class="col-md-3" v-for="(value, index) in account.errors" v-bind:key="index">{{ value }}</li>
-                <div class="col-md-9"></div>
+                <li class="col-md-12 error" v-for="(value, index) in account.errors" v-bind:key="index">{{ value }}</li>
             </ul>
         </div>
         <div v-else><br>
@@ -37,7 +36,7 @@
         </div>
 
         <div class="col-md-9"></div>
-        <button v-on:click="checkForm(account)" class="btn btn-success col-md-3">Register</button>
+        <button id="registerButton" v-on:click="checkForm(account)" class="btn btn-success col-md-3">Register</button>
     </div>
 </template>
 
@@ -63,10 +62,12 @@
             checkForm(account) {
                 accountService.methods.checkRegisterForm(account, this);
                 this.account.errors = errorService.methods.getErrors(this);
-                if (this.account.errors.length === 0) {
-                    accountService.methods.registerAccount(account);
-                    this.$router.push("login")
-                }
+                setTimeout(function(){
+                    if (this.account.errors.length === 0) {
+                        accountService.methods.registerAccount(account);
+                        this.$router.push("login")
+                    }
+                }, 1000);
             }
         }
     }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="4">
+
+  <testsuite name="CharactersTest"
+    errors="0" failures="1" hostname="" id="" package="CharactersTest" skipped="0"
+    tests="4" time="20.49" timestamp="">
+  
+    <testcase name="Character creation test" classname="CharactersTest" time="6.840" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Character list test" classname="CharactersTest" time="2.286" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Character play test" classname="CharactersTest" time="2.788" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Character deletion test" classname="CharactersTest" time="8.580" assertions="1">  <failure message="Testing if element &lt;.characterTable&gt; is not present in 5000ms - expected &#34;is not present&#34; but got: &#34;present&#34; (5309ms)">    at Object.Character deletion test (C:\Users\Emre\frontend-individueel\tests\CharactersTest.js:48:21)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)</failure>
+
+    
+    </testcase>
+  
+
+  
+    <system-err>
+        NoSuchElementError: An error occurred while running .getText() command on &lt;.error&gt;: 
+   {&#34;value&#34;:[]}
+       at runMicrotasks (&lt;anonymous&gt;)
+       at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    </system-err>
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>

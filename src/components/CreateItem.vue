@@ -4,8 +4,7 @@
         <div v-if="item.errors.length > 0">
             <b>Please correct the following error(s):</b>
             <ul>
-                <li class="col-md-3" v-for="(value, index) in item.errors" v-bind:key="index">{{ value }}</li>
-                <div class="col-md-9"></div>
+                <li class="col-md-12" v-for="(value, index) in item.errors" v-bind:key="index">{{ value }}</li>
             </ul>
         </div>
         <div class="container row">
@@ -21,7 +20,11 @@
             </div>
             <div class="col-md-5">
                 <select required v-model="item.type" id="type" name="type">
-                    <option v-for="(value, index) in typesArray" v-bind:key="index">{{value}}</option>
+                   <!-- <option v-for="(value, index) in typesArray" v-bind:key="index">{{value}}</option>-->
+                    <option value="Weapon">Weapon</option>
+                    <option value="Tool">Tool</option>
+                    <option value="Food">Food</option>
+                    <option value="Armour">Armour</option>
                 </select>
             </div>
             <div class="col-md-5"></div>
@@ -32,7 +35,7 @@
                 <input type="text" class="form-control" id="itemImage" required v-model="item.itemImage" name="itemImage">
             </div>
         </div>
-        <button v-on:click="checkForm(item)" class="btn btn-success col-md-3">Create Item</button>
+        <button id="create" v-on:click="checkForm(item)" class="btn btn-success col-md-3">Create Item</button>
     </div>
 </template>
 
@@ -69,7 +72,6 @@
                 if (this.item.errors.length === 0) {
                     itemService.methods.createItem(item);
                     this.$router.push("/items")
-                    location.reload();
                 }
             }
         },

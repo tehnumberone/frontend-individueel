@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="3">
+
+  <testsuite name="ItemsTest"
+    errors="0" failures="1" hostname="" id="" package="ItemsTest" skipped="0"
+    tests="3" time="14.17" timestamp="">
+  
+    <testcase name="Item creation test" classname="ItemsTest" time="3.950" assertions="6">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Item list test" classname="ItemsTest" time="2.296" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="Item deletion test" classname="ItemsTest" time="7.928" assertions="1">  <failure message="Testing if element &lt;.itemTable&gt; is not present in 5000ms - expected &#34;is not present&#34; but got: &#34;present&#34; (5372ms)">    at Object.Item deletion test (C:\Users\Emre\frontend-individueel\tests\ItemsTest.js:39:21)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)</failure>
+
+    
+    </testcase>
+  
+
+  
+    <system-err>
+        NoSuchElementError: An error occurred while running .getText() command on &lt;.error&gt;: 
+   {&#34;value&#34;:[]}
+       at runMicrotasks (&lt;anonymous&gt;)
+       at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    </system-err>
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>

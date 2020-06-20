@@ -20,6 +20,9 @@ export const characterService = {
                     console.log(e);
                 });
         },
+        addToCharactersList(character,Vue){
+            Vue.$store.commit('addCharacter', character);
+        },
         deleteCharacter(characterId) {
             http
                 .post("/characters/delete", characterId)
@@ -30,21 +33,32 @@ export const characterService = {
                     console.log(e);
                 });
         },
-        setCharacterById(characterId,Vue){
+        deleteCharacterByName(charactername){
             http
-                .get("/character/" + characterId)
+                .post("/characters/delete2", charactername)
                 .then(response => {
-                    Vue.$store.commit('setCharacter', response.data); // JSON are parsed automatically.
+                    console.log(response.data);
                 })
                 .catch(e => {
                     console.log(e);
                 });
         },
-        setAllCharactersByAccountId(accountId,Vue) {
+        setCharacterById(characterId, Vue) {
+                http
+                    .get("/character/" + characterId)
+                    .then(response => {
+                        Vue.$store.commit('setCharacter', response.data);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+        },
+        setAllCharactersByAccountId(accountId, Vue) {
             http
                 .get("/characters/" + accountId)
                 .then(response => {
-                    Vue.$store.commit('setCharacters', response.data); // JSON are parsed automatically.
+                    Vue.$store.commit('setCharacters', response.data);
+                    console.log(response.data);
                 })
                 .catch(e => {
                     console.log(e);

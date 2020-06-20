@@ -64,6 +64,11 @@ export default new Vuex.Store({
         setCharacter(state, character){
             localStorage.setItem('character',JSON.stringify(character));
         },
+        addCharacter(state,character){
+            let tempChars = JSON.parse(localStorage.getItem('characters'));
+            tempChars.push(character);
+            localStorage.setItem('characters',JSON.stringify(tempChars));
+        },
     },
     getters: {
         getErrors: state => {

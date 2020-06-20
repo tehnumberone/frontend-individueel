@@ -7,7 +7,7 @@
                 <th>Character Level</th>
                 <th>Options</th>
             </tr>
-            <tr v-for="(character, index) in characters" v-bind:key="index">
+            <tr v-for="(character, index) in characters" v-bind:key="index" class="characterTable">
                 <td><img/> {{character.characterModel}}
                     <label class="charName">{{character.name}}</label>
                 </td>
@@ -16,10 +16,10 @@
                 </td>
                 <td class="smalltd">
                     <div>
-                        <button v-on:click="playCharacter(character.id) " class="btn btn-success"
+                        <button id="play" v-on:click="playCharacter(character.characterId) " class="btn btn-success"
                                 style="margin-right:5px">Play
                         </button>
-                        <button v-on:click="deleteCharacter(character.id)" class="btn btn-success"
+                        <button id="delete" v-on:click="deleteCharacter(character)" class="btn btn-success"
                                 style="margin-right:5px">Delete
                         </button>
                     </div>
@@ -27,7 +27,11 @@
             </tr>
             <tr>
                 <td>
-                    <button v-on:click="createCharacterPage()" class="btn btn-success">New Character</button>
+                    <button id="newCharacter" v-on:click="createCharacterPage()" class="btn btn-success">New Character
+                    </button>
+                </td>
+                <td>
+                    <button id="refreshButton" v-on:click="refreshList()" class="btn btn-success">Refresh List</button>
                 </td>
             </tr>
         </table>
@@ -48,25 +52,37 @@
         methods: {
             retrieveCharacters() {
                 let user = JSON.parse(sessionStorage.getItem('user'));
-                console.log(user.id);
-                characterService.methods.setAllCharactersByAccountId(user.id, this);
-                this.characters = characterService.methods.getAllCharacters(this);
-                console.log(this.characters);
+                let templist = characterService.methods.getAllCharacters(this)
+                if(templist !== null){characterService.methods.setAllCharactersByAccountId(user.id, this);}
+                //let temp = characterService.methods.getAllCharacters(this)
+                let temp = JSON.parse(localStorage.getItem('characters'));
+                this.characters = temp;
             },
             refreshList() {
-                this.retrieveCharacters();
-            },
-            deleteCharacter(characterId) {
-                characterService.methods.deleteCharacter(characterId);
-                this.retrieveCharacters();
+                let temp = characterService.methods.getAllCharacters(this)
+                this.characters = temp;
                 location.reload();
+            },
+            deleteCharacter(character) {
+                console.log(character);
+                if (character.characterId === 0) {
+                    characterService.methods.deleteCharacterByName(character.name)
+                } else {
+                    characterService.methods.deleteCharacter(character.characterId);
+                }
+                let user = JSON.parse(sessionStorage.getItem('user'));
+                characterService.methods.setAllCharactersByAccountId(user.id, this);
+                this.characters = this.characters.filter(e => e !== character);
             },
             createCharacterPage() {
                 this.$router.push("/characters/create");
             },
             playCharacter(characterId) {
-                characterService.methods.setCharacterById(characterId,this);
+                characterService.methods.setCharacterById(characterId, this);
                 this.$router.push("/play");
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
             }
         },
         mounted() {

@@ -10,7 +10,7 @@
                 <th>Hydration</th>
                 <th>Hunger</th>
             </tr>
-            <tr >
+            <tr class="characterTable">
                 <td><img/> {{character.characterModel}}
                     <label class="charName">{{character.name}}</label>
                 </td>

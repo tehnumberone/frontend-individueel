@@ -6,8 +6,7 @@
         <div v-if="character.errors.length > 0">
             <b>Please correct the following error(s):</b>
             <ul>
-                <li class="col-md-3" v-for="(value, index) in character.errors" v-bind:key="index">{{ value }}</li>
-                <div class="col-md-9"></div>
+                <li class="col-md-12" v-for="(value, index) in character.errors" v-bind:key="index">{{ value }}</li>
             </ul>
         </div>
         <div class="container row">
@@ -27,7 +26,7 @@
             </div>
         </div>
         <br>
-        <button v-on:click="checkForm(character)" class="btn btn-success col-md-2">Create</button>
+        <button id="create" v-on:click="checkForm(character)" class="btn btn-success col-md-2">Create</button>
     </div>
 </template>
 
@@ -42,8 +41,14 @@
                 character: {
                     errors: [],
                     accountId: 0,
+                    characterId: 0,
+                    inventoryId: 0,
                     name: null,
                     characterModel: null,
+                    level: 1,
+                    hp: 10,
+                    hunger: 10,
+                    hydration: 10,
                 },
             }
         },
@@ -55,8 +60,10 @@
                     let user = JSON.parse(sessionStorage.getItem('user'));
                     character.accountId = user.id;
                     characterService.methods.createCharacter(character);
-                    this.$router.push("/characters")
-                    location.reload();
+                    characterService.methods.addToCharactersList(character, this);
+                    console.log(character);
+                    this.characters = characterService.methods.getAllCharacters(this);
+                    this.$router.push("/characters");
                 }
             }
         },

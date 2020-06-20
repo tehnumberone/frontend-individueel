@@ -35,6 +35,12 @@ export const accountService = {
                 errorService.methods.removeError("Valid email required.", Vue);
             }
             if (account.username !== "" || account.email !== null) {
+                if (account.username === "") {
+                    account.username = null;
+                }
+                if (account.email === "") {
+                    account.email = null;
+                }
                 this.CheckAccount(account, Vue);
             }
         },
@@ -43,12 +49,6 @@ export const accountService = {
             return re.test(email);
         },
         CheckAccount(account, Vue) {
-            if (account.username == "") {
-                account.username = null;
-            }
-            if (account.email == "") {
-                account.email = null;
-            }
             http
                 .get("/account/email/" + account.username + "/" + account.email)
                 .then(response => {

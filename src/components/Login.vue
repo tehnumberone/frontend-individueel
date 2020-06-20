@@ -4,8 +4,8 @@
         <div class="form-row">
             <div v-if="account.errors.length > 0">
                 <b>Please correct the following error(s):</b>
-                <ul>
-                    <li class="col-md-3" v-for="(value, index) in account.errors" v-bind:key="index">{{ value }}</li>
+                <ul id="errorList">
+                    <li class="col-md-3 error" v-for="(value, index) in account.errors" v-bind:key="index">{{ value }}</li>
                     <div class="col-md-9"></div>
                 </ul>
             </div>

@@ -10,14 +10,15 @@
                 <router-link class="btn btn-primary" to="/login">Login</router-link>
             </div>
             <div v-else>
-                <div>Logged in as {{getusername}}</div>
-                <router-link class="btn btn-primary" to="/characters">Characters</router-link>
-                <router-link class="btn btn-primary" to="/characters/create">Create Character</router-link>
-                <router-link v-if="getrole === 'Administrator'" class="btn btn-primary" to="/items">Items</router-link>
-                <router-link v-if="getrole === 'Administrator'" class="btn btn-primary" to="/items/create">
+                <div id="sessionUsername">Logged in as {{getusername}}</div>
+                <br>
+                <router-link id="home" class="btn btn-primary p" to="/">Home</router-link>
+                <router-link id="characters" class="btn btn-primary p" to="/characters">Characters</router-link>
+                <router-link id="items" v-if="getrole === 'Administrator'" class="btn btn-primary p" to="/items">Items</router-link>
+                <router-link id="createItem" v-if="getrole === 'Administrator'" class="btn btn-primary p" to="/items/create">
                     Create Items
                 </router-link>
-                <button class="btn btn-primary" v-on:click="logOut()"> Logout</button>
+                <button id="logOut" class="btn btn-primary" v-on:click="logOut()"> Logout</button>
             </div>
         </nav>
     </div>
@@ -58,4 +59,8 @@
 
 <style scoped>
     @import '../assets/styles/style.css';
+    .p{
+        padding-right:10px;
+        margin-right:10px;
+    }
 </style>
