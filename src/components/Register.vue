@@ -1,6 +1,6 @@
 <template>
-    <div class="form-row">
-        <div class="col-md-12"><h1>Register</h1></div>
+    <div class="form-row" style="margin-left:400px">
+        <div class="col-md-12"><h1 style="color: #e5e5e5">Register</h1></div>
         <div v-if="account.errors.length > 0">
             <b>Please correct the following error(s):</b>
             <ul>
@@ -60,14 +60,13 @@
         },
         methods: {
             checkForm(account) {
+                console.log(account);
                 accountService.methods.checkRegisterForm(account, this);
                 this.account.errors = errorService.methods.getErrors(this);
-                setTimeout(function(){
                     if (this.account.errors.length === 0) {
                         accountService.methods.registerAccount(account);
                         this.$router.push("login")
                     }
-                }, 1000);
             }
         }
     }

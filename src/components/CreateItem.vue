@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <h1>CreateItem</h1>
+    <div style="margin-left:550px;margin-top:50px">
         <div v-if="item.errors.length > 0">
             <b>Please correct the following error(s):</b>
             <ul>

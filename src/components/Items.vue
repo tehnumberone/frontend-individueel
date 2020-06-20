@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>Items</h1>
         <table class="table table-bordered table-dark largetd" align="center" style="width: 70%">
             <tr>
                 <th>Item Image</th>

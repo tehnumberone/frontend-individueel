@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="5">
+
+  <testsuite name="LoginTest"
+    errors="0" failures="0" hostname="" id="" package="LoginTest" skipped="0"
+    tests="5" time="19.07" timestamp="">
+  
+    <testcase name="Login test" classname="LoginTest" time="2.403" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="session validation test" classname="LoginTest" time="0.5270" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="session logout test" classname="LoginTest" time="1.859" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="validation test no password" classname="LoginTest" time="6.777" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="validation test no username" classname="LoginTest" time="7.500" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>

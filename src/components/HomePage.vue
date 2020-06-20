@@ -1,6 +1,11 @@
 <template>
     <div>
-        <p>hello sir this is the homepage!</p>
+        <div class="text-center">
+            <h2 class="display-4">Welcome to Stranded</h2>
+        </div>
+        <div class="mainPage">
+            <img src="../assets/demoHoofdpagina.gif"/>
+        </div>
     </div>
 </template>
 

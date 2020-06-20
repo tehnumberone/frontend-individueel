@@ -1,7 +1,5 @@
 <template>
     <div>
-
-        <h1>Create Character</h1>
         <br>
         <div v-if="character.errors.length > 0">
             <b>Please correct the following error(s):</b>

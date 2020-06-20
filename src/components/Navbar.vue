@@ -1,27 +1,42 @@
 <template>
-    <div>
-        <br>
-        <nav id="navbar">
-            <div v-if="getusername === null || getusername === undefined || getusername === '' ">
-                <router-link
-                        class="btn btn-primary" to="/register">
-                    Register
-                </router-link>
-                <router-link class="btn btn-primary" to="/login">Login</router-link>
-            </div>
-            <div v-else>
-                <div id="sessionUsername">Logged in as {{getusername}}</div>
-                <br>
-                <router-link id="home" class="btn btn-primary p" to="/">Home</router-link>
-                <router-link id="characters" class="btn btn-primary p" to="/characters">Characters</router-link>
-                <router-link id="items" v-if="getrole === 'Administrator'" class="btn btn-primary p" to="/items">Items</router-link>
-                <router-link id="createItem" v-if="getrole === 'Administrator'" class="btn btn-primary p" to="/items/create">
-                    Create Items
-                </router-link>
-                <button id="logOut" class="btn btn-primary" v-on:click="logOut()"> Logout</button>
-            </div>
-        </nav>
-    </div>
+        <div class="nav-container">
+            <div v-if="getusername !== null && getusername !== undefined && getusername !== ''" id="sessionUsername" class="username">Logged in as {{getusername}}</div>
+            <nav id="navi" class="navbar navbar-expand-sm border-bottom box-shadow mb-3">
+                <div class="container">
+                        <div v-if="getusername === null || getusername === undefined || getusername === '' ">
+                            <router-link
+                                    class="nav-link p" to="/register">
+                                Register
+                            </router-link>
+                            <router-link class="nav-link p" to="/login">Login</router-link>
+                        </div>
+                        <div v-else>
+                            <ul class="navbar-nav flex-grow-1">
+                                <li>
+                                    <router-link id="home" class="navbar-brand p" to="/">Home</router-link>
+                                </li>
+                                <li>
+                                    <router-link id="characters" class="nav-link p" to="/characters">Characters
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link id="items" v-if="getrole === 'Administrator'" class="nav-link p"
+                                                 to="/items">
+                                        Items
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link id="createItem" v-if="getrole === 'Administrator'" class="nav-link p"
+                                                 to="/items/create">
+                                        Create Items
+                                    </router-link>
+                                </li>
+                                <li><button id="logOut" class="btn btn-primary p" style="margin-left: 600px;" v-on:click="logOut()"> Logout</button></li>
+                            </ul>
+                        </div>
+                </div>
+            </nav>
+        </div>
 </template>
 
 <script>
@@ -47,7 +62,7 @@
                 }
             },
         },
-        methods:{
+        methods: {
             logOut() {
                 this.$store.commit('logOut');
                 this.$router.push('/login');
@@ -59,8 +74,19 @@
 
 <style scoped>
     @import '../assets/styles/style.css';
-    .p{
-        padding-right:10px;
-        margin-right:10px;
+
+    .username {
+        padding-left:10px;
+    }
+
+    .p {
+        display: inline-block;
+        text-align: left;
+        margin-bottom: 10px;
+        color:white;
+    }
+    .p:hover{
+        border-radius:10px;
+        background-color: #135058;
     }
 </style>

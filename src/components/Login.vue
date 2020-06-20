@@ -1,7 +1,8 @@
 <template>
     <div>
-        <h1>Login</h1>
-        <div class="form-row">
+
+        <h1 style="color: #e5e5e5;margin-left:400px" >Login</h1>
+        <div class="form-row" style="margin-left:400px">
             <div v-if="account.errors.length > 0">
                 <b>Please correct the following error(s):</b>
                 <ul id="errorList">

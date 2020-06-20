@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>Characters</h1>
         <table class="table table-bordered table-dark largetd col-md-6" align="center">
             <tr>
                 <th>Character</th>

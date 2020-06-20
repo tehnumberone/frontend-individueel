@@ -26,7 +26,9 @@ module.exports = {
     'Item list test': function (client) {
         client
             .click('#refreshButton')
-            .pause(2000)
+            .refresh()
+            .click('#refreshButton')
+            .click('#refreshButton')
             .assert.elementPresent(".itemTable")
     },
     'Item deletion test': function (client) {

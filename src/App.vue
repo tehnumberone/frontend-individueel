@@ -3,7 +3,7 @@
         <div class="site-info">
         </div>
         <nav>
-            <Header></Header>
+            <Header ></Header>
         </nav>
         <br/>
         <router-view/>
